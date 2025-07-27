@@ -1,23 +1,24 @@
 #include "MovingObjectAdapter.h"
 #include "Structures.h"
 #include "PropertyNames.h"
-#include <cmath>
 
 Position MovingObjectAdapter::getPosition() {
-    return *m_entity.getProperty<Position>(PName::Position);
+
+    if(auto position = m_entity.getProperty<Position>(PName::Position))
+        return *position;
+    else
+        throw std::runtime_error("It is not possible to read the position");
 }
 
-void MovingObjectAdapter::setVelocity(const Velocity& v) {
-    *m_entity.getProperty<Velocity>(PName::Velocity) = v;
+Velocity MovingObjectAdapter::getVelocity() {
+    if(auto velocity = m_entity.getProperty<Velocity>(PName::Velocity))
+        return *velocity;
+    else
+        throw std::runtime_error("It is not possible to read the velocity");
 }
 
-void MovingObjectAdapter::setPosition(const Position &) {
-    const auto position = m_entity.getProperty<Position>(PName::Position);
-    const auto angle = m_entity.getProperty<Angle>(PName::Angle);
-
-    auto nx = position->x * cos(angle->a / angle->n * M_PI / 180);
-    auto ny = position->y * sin(angle->a / angle->n * M_PI / 180);
-
-    auto dfd = std::make_unique<Position>(nx, ny);
-    m_entity.setProperty<Position>(PName::Position, std::make_unique<Position>(nx, ny));
+void MovingObjectAdapter::setPosition(const Position& pos) {
+    if(!m_entity.hasProperty(PName::Position))
+        throw std::runtime_error("It is not possible to change the position.");
+    m_entity.setProperty<Position>(PName::Position, std::make_unique<Position>(pos.x, pos.y));
 }

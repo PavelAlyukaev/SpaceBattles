@@ -4,14 +4,14 @@
 
 struct MovingObjectAdapter : public IMovingObject {
 
-    MovingObjectAdapter(const UEntity &entity) : m_entity(entity) {}
+    explicit MovingObjectAdapter(UEntity& entity) : m_entity(entity) {}
 
     Position getPosition() override;
 
-    void setVelocity(const Velocity &) override;
+    Velocity getVelocity() override;
 
     void setPosition(const Position &) override;
 
 private:
-    UEntity m_entity;
+    UEntity& m_entity;
 };

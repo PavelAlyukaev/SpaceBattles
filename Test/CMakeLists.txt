@@ -19,7 +19,7 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
 
-        PRIVATE SolverLib
+        PRIVATE GameServer
         PRIVATE gtest
         PRIVATE gtest_main
 )

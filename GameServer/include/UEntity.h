@@ -1,27 +1,31 @@
-
+#pragma once
 #include <unordered_map>
-#include <typeindex>
 #include <memory>
 #include "Interfaces.h"
 
 class UEntity {
 
-    private:
+private:
 
-        std::unordered_map<std::string, std::unique_ptr<IComponent>> componentPools;
+    std::unordered_map<std::string, std::unique_ptr<IComponent>> componentPools;
 
-    public:
+public:
 
-        template<typename T>
-        void setProperty(const std::string& name, std::unique_ptr<T> component) {
-            componentPools[name] = std::move(component);
-        }
+    template<typename T>
+    void setProperty(const std::string &name, std::unique_ptr<T> component) {
+        componentPools[name] = std::move(component);
+    }
 
-        template<typename T>
-        T* getProperty(const std::string& name) {
+    template<typename T>
+    T* getProperty(const std::string &name) {
 
-            auto it = componentPools.find(name);
-            return (it != componentPools.end()) ? static_cast<T*>(it->second.get()) : nullptr;
-        }
+        auto it = componentPools.find(name);
+        return (it != componentPools.end()) ? static_cast<T*>(it->second.get()) : nullptr;
+    }
+
+
+    [[nodiscard]] bool hasProperty(const std::string &name) const {
+        return componentPools.contains(std::string{name});
+    }
 };
 

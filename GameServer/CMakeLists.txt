@@ -12,6 +12,12 @@ set(SOURCE
         include/Interfaces.h
         src/MovingObjectAdapter.cpp
         include/PropertyNames.h
+        include/RotatingObjectAdapter.h
+        src/RotatingObjectAdapter.cpp
+        src/RotatingObjectAdapter.cpp
+        src/Rotate.cpp
+        include/Move.h
+        src/Move.cpp
 )
 MESSAGE(${PROJECT_NAME})
 

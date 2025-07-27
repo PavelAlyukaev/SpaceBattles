@@ -3,8 +3,8 @@
 #include <string>
 
 namespace PName{
-    constexpr std::string Position = "Position";
-    constexpr std::string Velocity = "Velocity";
-    constexpr std::string Angle = "Angle";
-    constexpr std::string AngleVelocity = "AngleVelocity";
+    const std::string Position = "Position";
+    const std::string Velocity = "Velocity";
+    const std::string Angle = "Angle";
+    const std::string AngleVelocity = "AngleVelocity";
 }

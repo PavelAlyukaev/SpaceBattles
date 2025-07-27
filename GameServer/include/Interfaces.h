@@ -14,13 +14,13 @@ struct IComponent
 struct IMovingObject
 {
     virtual Position getPosition() = 0;
-    virtual void setVelocity(const Velocity&) = 0;
+    virtual Velocity getVelocity() = 0;
     virtual void setPosition(const Position&) = 0;
 };
 
 struct IRotatingObject
 {
     virtual Angle getAngle() = 0;
-    virtual void setAngleVelocity(const AngleVelocity&) = 0;
+    virtual AngleVelocity getAngleVelocity() = 0;
     virtual void setAngle(const Angle&) = 0;
 };
