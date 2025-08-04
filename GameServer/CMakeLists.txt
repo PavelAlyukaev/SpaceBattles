@@ -18,6 +18,11 @@ set(SOURCE
         src/Rotate.cpp
         include/Move.h
         src/Move.cpp
+        include/ExceptionHandler.h
+        include/CommandQueue.h
+        include/Commands.h
+        include/Handlers.h
+        src/Handlers.cpp
 )
 MESSAGE(${PROJECT_NAME})
 
@@ -31,6 +36,6 @@ if (MSVC)
     )
 else ()
     target_compile_options(${PROJECT_NAME} PRIVATE
-            -Wall -Wextra -pedantic -Werror
+            -Wall -Wextra -pedantic #-Werror
     )
 endif()

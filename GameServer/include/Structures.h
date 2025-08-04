@@ -36,3 +36,14 @@ struct AngleVelocity: public  IComponent {
     AngleVelocity(int da) : da(da) {}
     ~AngleVelocity() override = default;
 };
+
+struct Log: public ILog
+{
+    void Error(std::string_view s) override {m_logMessage = s;}
+    void Warning(std::string_view s) override {m_logMessage = s;}
+    void Info(std::string_view s) override {m_logMessage = s;}
+    std::string GetLogMessage(){return m_logMessage; }
+
+private:
+    std::string m_logMessage;
+};

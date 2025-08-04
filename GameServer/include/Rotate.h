@@ -2,13 +2,14 @@
 
 #include "Interfaces.h"
 
-class Rotete {
+class Rotate : public Command<Rotate> {
 public:
-    explicit Rotete(IRotatingObject& ro) : m_ro(ro){};
+    explicit Rotate(IRotatingObject &ro) : m_ro(ro) {};
 
-    void Execute();
+    ~Rotate() override = default;
+
+    void Execute() override;
+
 private:
-    IRotatingObject& m_ro;
+    IRotatingObject &m_ro;
 };
-
-
