@@ -9,32 +9,43 @@
 class CommandQueue : Command<CommandQueue>
 {
 public:
-    static CommandQueue& Instance(){
+    static CommandQueue &Instance()
+    {
         static CommandQueue cq;
         return cq;
     }
 
 
-    void Execute() override{
-        while (!m_commandQueue.empty()) {
+    void Execute() override
+    {
+        while (!m_commandQueue.empty())
+        {
             auto command = std::move(m_commandQueue.front());
             m_commandQueue.pop();
-
-            try {
+            auto cmdType = std::type_index(typeid(*command)).name();
+            try
+            {
                 command->Execute();
-            } catch (const std::exception &ex) {
+            }
+            catch (std::exception& e)
+            {
+                auto exType = std::type_index(typeid(e)).name();
 
-                auto mex = std::make_shared<std::exception>(ex);
-                ExceptionHandler::Instance().getCommand(command, mex,std::type_index(typeid(ex)))->Execute();
+                std::exception_ptr eptr = std::current_exception();
+                ExceptionHandler::Instance().getCommand(command, eptr)->Execute();
             }
         }
     }
-    template< std::derived_from<ICommand> TCommand>
-    void RegisterCommand(std::unique_ptr<TCommand> cmd){
+
+    template<std::derived_from<ICommand> TCommand>
+    void RegisterCommand(std::unique_ptr<TCommand> cmd)
+    {
+        auto cmdType = std::type_index(typeid(*cmd)).name();
         m_commandQueue.push(std::move(cmd));
     }
 
 private:
     CommandQueue() = default;
+
     std::queue<std::shared_ptr<ICommand>> m_commandQueue;
 };

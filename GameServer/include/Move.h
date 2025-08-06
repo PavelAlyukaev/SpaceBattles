@@ -2,10 +2,12 @@
 
 #include "Interfaces.h"
 
-class Move : public Command<Move> {
+class Move : public Command<Move>
+{
 
 public:
-    explicit Move(IMovingObject &mo) : m_mo(mo) {};
+    explicit Move(IMovingObject &mo) : m_mo(mo)
+    {};
 
     ~Move() override = default;
 

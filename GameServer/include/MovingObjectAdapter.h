@@ -1,10 +1,13 @@
 #pragma once
+
 #include "Interfaces.h"
 #include "UEntity.h"
 
-struct MovingObjectAdapter : public IMovingObject {
+struct MovingObjectAdapter : public IMovingObject
+{
 
-    explicit MovingObjectAdapter(UEntity& entity) : m_entity(entity) {}
+    explicit MovingObjectAdapter(UEntity &entity) : m_entity(entity)
+    {}
 
     Position getPosition() override;
 
@@ -13,5 +16,5 @@ struct MovingObjectAdapter : public IMovingObject {
     void setPosition(const Position &) override;
 
 private:
-    UEntity& m_entity;
+    UEntity &m_entity;
 };

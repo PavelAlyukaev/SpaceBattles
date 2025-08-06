@@ -2,7 +2,8 @@
 
 #include <string>
 
-namespace PName{
+namespace PName
+{
     const std::string Position = "Position";
     const std::string Velocity = "Velocity";
     const std::string Angle = "Angle";
